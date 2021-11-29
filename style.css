@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+}
+
+header {
+    background-color: lightslategrey;
+}
+
+main {
+    background-color: teal;
+}
+
+footer {
+    background-color: lightslategrey;
+}
