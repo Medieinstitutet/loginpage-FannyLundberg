@@ -72,7 +72,8 @@ footer {
 
 span {
     margin: 0;
-    text-align: end;
     padding-top: 5%;
     padding-right: 2%;
+    display: block;
+    text-align: end;
 }

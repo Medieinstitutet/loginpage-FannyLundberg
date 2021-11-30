@@ -1,3 +1,5 @@
+//window.addEventListener("load", ??)
+
 // Variabler för att hämta element
 const header = document.getElementById("header");
 const logInOrLogOff = document.getElementById("logInOrLogOff");
@@ -39,16 +41,19 @@ console.log(inputUserName.value);
 console.log(inputPassword.value);
 
 if (inputUserName.value == "janne" && inputPassword.value == "test") {
-	console.log("rätt användarnamn och lösenord");
+	console.log("Rätt användarnamn och lösenord");
     // Skapa innehåll i main för inloggat läge
-    logInPageMainContent.innerText = "Hej janne, välkommen till inloggat läge!";
+    logInPageMainContent.innerText = "Hej " + inputUserName.value + ", välkommen till inloggat läge!";
     // Få "Logga ut"-knapp istället
     btn.innerText = "Logga ut";
     // Dölja inputfälten
     inputUserName.remove();
     inputPassword.remove();
+    // Spara i localStorage
+    let usersInput = inputUserName.value + " " + inputPassword.value;
+    localStorage.setItem("user", (usersInput));
 }  else {
-    console.log("fel användarnamn eller lösenord")
+    console.log("Fel användarnamn eller lösenord")
     let wrongInput = document.createElement("p");
     wrongInput.innerText = "Du har angett fel användarnamn eller lösenord. Vänligen försök igen."
     logInOrLogOff.append(wrongInput);
