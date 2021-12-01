@@ -60,9 +60,10 @@ logInBtn.addEventListener("click", () => {
         localStorage.setItem("user", (usersInput));
     } else {
         console.log("Fel användarnamn eller lösenord")
-        let wrongInput = document.createElement("p");
+        let wrongInput = document.createElement("section");
         wrongInput.innerText = "Du har angett fel användarnamn eller lösenord. Vänligen försök igen."
-        logInOrLogOff.append(wrongInput);
+        mainContent.append(wrongInput);
+        logInPageMainContent.remove();
     }
 });
 
