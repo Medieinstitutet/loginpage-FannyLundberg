@@ -62,11 +62,10 @@ logInBtn.addEventListener("click", () => {
         wrongInput.innerText = "Du har angett fel användarnamn eller lösenord. Vänligen försök igen."
         mainContent.append(wrongInput);
         logInPageMainContent.remove();
-    }
-
+    } 
     // lösa så om man skrivit fel uppgifter en gång men sen skriver rätt - hamna på inloggat-läge
 
-    
+
 });
 
 displayUser();
