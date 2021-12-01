@@ -1,4 +1,4 @@
-//window.addEventListener("load", ??)
+window.addEventListener("load", displayUser);
 
 // Variabler för att hämta element
 const header = document.getElementById("header");
@@ -55,9 +55,7 @@ logInBtn.addEventListener("click", () => {
         inputUserName.remove();
         inputPassword.remove();
         logInBtn.remove();
-        // Spara i localStorage
-        let usersInput = inputUserName.value + " " + inputPassword.value;
-        localStorage.setItem("user", (usersInput));
+        displayUser();
     } else {
         console.log("Fel användarnamn eller lösenord")
         let wrongInput = document.createElement("section");
@@ -65,8 +63,13 @@ logInBtn.addEventListener("click", () => {
         mainContent.append(wrongInput);
         logInPageMainContent.remove();
     }
+
+    // lösa så om man skrivit fel uppgifter en gång men sen skriver rätt - hamna på inloggat-läge
+
+    
 });
 
+displayUser();
 
 // Kunna logga ut
 //Klick på knappen
@@ -83,4 +86,8 @@ logOutBtn.addEventListener("click", () => {
 });
 
 
-// localStorage
+// localStorage (visa rätt användare och hålla i inloggat läge)
+function displayUser() {
+    localStorage.setItem("user", inputUserName.value);
+    inputUserName.innerText = localStorage.getItem("user");
+}
