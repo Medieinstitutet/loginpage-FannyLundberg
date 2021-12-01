@@ -19,10 +19,15 @@ inputPassword.placeholder = "Lösenord";
 logInOrLogOff.append(inputPassword);
 
 
-// Göra knapp för Logga in
-let btn = document.createElement("button");
-btn.innerText = "Logga in";
-logInOrLogOff.append(btn);
+// Göra knapp för "Logga in"
+let logInBtn = document.createElement("button");
+logInBtn.innerText = "Logga in";
+logInOrLogOff.append(logInBtn);
+
+
+// Göra knapp för "Logga ut"
+let logOutBtn = document.createElement("button");
+logOutBtn.innerText = "Logga ut";
 
 
 // Skapa innehåll i main för oinloggat läge
@@ -32,32 +37,49 @@ mainContent.append(logInPageMainContent);
 
 
 // Kunna logga in (if)
-    //Klick på knappen
-btn.addEventListener("click", () => {
-    console.log("Klick på knappen");
+//Klick på knappen
+logInBtn.addEventListener("click", () => {
+    console.log("Klick på Logga in-knappen");
 
     // Kontrollera användarnamn och lösenord matchar
-console.log(inputUserName.value);
-console.log(inputPassword.value);
+    console.log("Användarnamn: " + inputUserName.value);
+    console.log("Lösenord: " + inputPassword.value);
 
-if (inputUserName.value == "janne" && inputPassword.value == "test") {
-	console.log("Rätt användarnamn och lösenord");
-    // Skapa innehåll i main för inloggat läge
-    logInPageMainContent.innerText = "Hej " + inputUserName.value + ", välkommen till inloggat läge!";
-    // Få "Logga ut"-knapp istället
-    btn.innerText = "Logga ut";
-    // Dölja inputfälten
-    inputUserName.remove();
-    inputPassword.remove();
-    // Spara i localStorage
-    let usersInput = inputUserName.value + " " + inputPassword.value;
-    localStorage.setItem("user", (usersInput));
-}  else {
-    console.log("Fel användarnamn eller lösenord")
-    let wrongInput = document.createElement("p");
-    wrongInput.innerText = "Du har angett fel användarnamn eller lösenord. Vänligen försök igen."
-    logInOrLogOff.append(wrongInput);
-}
+    if (inputUserName.value == "janne" && inputPassword.value == "test") {
+        console.log("Rätt användarnamn och lösenord");
+        // Skapa innehåll i main för inloggat läge
+        logInPageMainContent.innerText = "Hej " + inputUserName.value + ", välkommen till inloggat läge!";
+        // Få upp "Logga ut"-knapp istället
+        logInOrLogOff.append(logOutBtn);
+        // Dölja inputfälten och "Logga in"-knapp
+        inputUserName.remove();
+        inputPassword.remove();
+        logInBtn.remove();
+        // Spara i localStorage
+        let usersInput = inputUserName.value + " " + inputPassword.value;
+        localStorage.setItem("user", (usersInput));
+    } else {
+        console.log("Fel användarnamn eller lösenord")
+        let wrongInput = document.createElement("p");
+        wrongInput.innerText = "Du har angett fel användarnamn eller lösenord. Vänligen försök igen."
+        logInOrLogOff.append(wrongInput);
+    }
 });
 
-// Logga ut-knappen ska logga ut (skicka till oinloggad vy)
+
+// Kunna logga ut
+//Klick på knappen
+logOutBtn.addEventListener("click", () => {
+    console.log("Klick på Logga ut-knappen");
+    // Ändra innehåll i main till oinloggat läge
+    logInPageMainContent.innerText = "Hej, Välkommen till min sida! Vänligen logga in.";
+    // Visa inloggningsfälten och Logga in-knappen
+    logInOrLogOff.append(inputUserName);
+    logInOrLogOff.append(inputPassword);
+    logInOrLogOff.append(logInBtn);
+    // Ta bort Logga ut-knappen
+    logOutBtn.remove();
+});
+
+
+// localStorage
