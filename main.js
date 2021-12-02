@@ -1,4 +1,4 @@
-window.addEventListener("load", displayUser);
+window.addEventListener("load", keepLoggedIn);
 
 // Variabler för att hämta element
 const header = document.getElementById("header");
@@ -7,25 +7,25 @@ const mainContent = document.getElementById("mainContent");
 const footer = document.getElementById("footer");
 
 
-// Göra inputfönster för användarnamn
+// Skapa inputfönster för användarnamn
 let inputUserName = document.createElement("input");
 inputUserName.placeholder = "Användarnamn";
 logInOrLogOff.append(inputUserName);
 
 
-// Göra inputfönster för lösenord
+// Skapa inputfönster för lösenord
 let inputPassword = document.createElement("input");
 inputPassword.placeholder = "Lösenord";
 logInOrLogOff.append(inputPassword);
 
 
-// Göra knapp för "Logga in"
+// Skapa knapp för "Logga in"
 let logInBtn = document.createElement("button");
 logInBtn.innerText = "Logga in";
 logInOrLogOff.append(logInBtn);
 
 
-// Göra knapp för "Logga ut"
+// Skapa knapp för "Logga ut"
 let logOutBtn = document.createElement("button");
 logOutBtn.innerText = "Logga ut";
 
@@ -34,6 +34,17 @@ logOutBtn.innerText = "Logga ut";
 let logInPageMainContent = document.createElement("section");
 logInPageMainContent.innerText = "Hej, Välkommen till min sida! Vänligen logga in.";
 mainContent.append(logInPageMainContent);
+
+
+// localStorage (spara i localStorage om en korrekt inloggad användare)
+logInBtn.addEventListener("click", () => {
+    const inputUserNameValue = inputUserName.value;
+
+    if (inputUserName.value == "janne" && inputPassword.value == "test") {
+        console.log(inputUserNameValue);
+        localStorage.setItem("user", inputUserNameValue);
+    }
+});
 
 
 // Kunna logga in (if)
@@ -48,31 +59,30 @@ logInBtn.addEventListener("click", () => {
     if (inputUserName.value == "janne" && inputPassword.value == "test") {
         console.log("Rätt användarnamn och lösenord");
         // Skapa innehåll i main för inloggat läge
-        logInPageMainContent.innerText = "Hej " + inputUserName.value + ", välkommen till inloggat läge!";
+        logInPageMainContent.innerText = "Hej " + localStorage.getItem("user", "") + ", välkommen till inloggat läge!";
         // Få upp "Logga ut"-knapp istället
         logInOrLogOff.append(logOutBtn);
         // Dölja inputfälten och "Logga in"-knapp
         inputUserName.remove();
         inputPassword.remove();
         logInBtn.remove();
-        displayUser();
     } else {
         console.log("Fel användarnamn eller lösenord")
         let wrongInput = document.createElement("section");
         wrongInput.innerText = "Du har angett fel användarnamn eller lösenord. Vänligen försök igen."
         mainContent.append(wrongInput);
         logInPageMainContent.remove();
-    } 
-    // lösa så om man skrivit fel uppgifter en gång men sen skriver rätt - hamna på inloggat-läge
-
-
+            // om man skrivit fel uppgifter en gång men sen skriver rätt - hamna på oinloggat-läge
+            inputUserName.onclick = function () {
+                location.reload();
+            };
+    }   
 });
-
-displayUser();
 
 // Kunna logga ut
 //Klick på knappen
 logOutBtn.addEventListener("click", () => {
+    localStorage.removeItem("user", "janne");
     console.log("Klick på Logga ut-knappen");
     // Ändra innehåll i main till oinloggat läge
     logInPageMainContent.innerText = "Hej, Välkommen till min sida! Vänligen logga in.";
@@ -85,8 +95,18 @@ logOutBtn.addEventListener("click", () => {
 });
 
 
-// localStorage (visa rätt användare och hålla i inloggat läge)
-function displayUser() {
-    localStorage.setItem("user", inputUserName.value);
-    inputUserName.innerText = localStorage.getItem("user");
-}
+// localStorage (hålla kvar i inloggat läge)
+function keepLoggedIn() {
+    if (localStorage ="user", "janne") {
+        logInPageMainContent.innerText = "Hej " + localStorage.getItem("user", "") + ", välkommen till inloggat läge!";
+        // Få upp "Logga ut"-knapp istället
+        logInOrLogOff.append(logOutBtn);
+        // Dölja inputfälten och "Logga in"-knapp
+        inputUserName.remove();
+        inputPassword.remove();
+        logInBtn.remove();
+    } 
+
+    // kunna lösa att man inte blir inloggad om localstorage är rensad
+
+};
