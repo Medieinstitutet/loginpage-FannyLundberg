@@ -97,7 +97,9 @@ logOutBtn.addEventListener("click", () => {
 
 // localStorage (hålla kvar i inloggat läge)
 function keepLoggedIn() {
-    if (localStorage ="user", "janne") {
+    let loggedIn = localStorage.getItem("user", "janne");
+
+    if (loggedIn) {
         logInPageMainContent.innerText = "Hej " + localStorage.getItem("user", "") + ", välkommen till inloggat läge!";
         // Få upp "Logga ut"-knapp istället
         logInOrLogOff.append(logOutBtn);
@@ -106,7 +108,4 @@ function keepLoggedIn() {
         inputPassword.remove();
         logInBtn.remove();
     } 
-
-    // kunna lösa att man inte blir inloggad om localstorage är rensad
-
 };
