@@ -1,10 +1,10 @@
 window.addEventListener("load", keepLoggedIn);
 
 // Variabler för att hämta element
-const header = document.getElementById("header");
+const header = document.getElementById("headOfPage");
 const logInOrLogOff = document.getElementById("logInOrLogOff");
 const mainContent = document.getElementById("mainContent");
-const footer = document.getElementById("footer");
+const footer = document.getElementById("footerOfPage");
 
 
 // Skapa inputfönster för användarnamn
@@ -80,7 +80,7 @@ logInBtn.addEventListener("click", () => {
 });
 
 // Kunna logga ut
-//Klick på knappen
+// Klick på knappen
 logOutBtn.addEventListener("click", () => {
     localStorage.removeItem("user", "janne");
     console.log("Klick på Logga ut-knappen");
@@ -90,7 +90,7 @@ logOutBtn.addEventListener("click", () => {
     logInOrLogOff.append(inputUserName);
     logInOrLogOff.append(inputPassword);
     logInOrLogOff.append(logInBtn);
-    // Ta bort Logga ut-knappen
+    // Ta bort "Logga ut"-knappen
     logOutBtn.remove();
 });
 
